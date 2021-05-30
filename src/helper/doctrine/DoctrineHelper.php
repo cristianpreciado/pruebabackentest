@@ -6,6 +6,7 @@ namespace zinobe\helper\doctrine;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\Setup;
+use Dotenv\Dotenv;
 
 /**
  * Class DoctrineHelper
@@ -25,14 +26,21 @@ class DoctrineHelper {
     if (empty(self::$entityManager)) {
       try {
         $config = Setup::createAnnotationMetadataConfiguration([getcwd() . '/src/model/'], TRUE, NULL, NULL, FALSE);
-
+        $dotenv = Dotenv::createImmutable(getcwd());
+        $dotenv->load();
+        $dotenv->required([
+          'MYSQL_HOST',
+          'MYSQL_DB',
+          'MYSQL_USERNAME',
+          'MYSQL_PASSWORD',
+      ]);
         // Database connection properties.
         $connectionOptions = [
           'driver' => 'pdo_mysql',
-          'host' => 'db',
-          'dbname' => 'zinobe',
-          'user' => 'root',
-          'password' => '123',
+          'host' => $_ENV['MYSQL_HOST'],
+          'dbname' => $_ENV['MYSQL_DB'],
+          'user' => $_ENV['MYSQL_USERNAME'],
+          'password' => $_ENV['MYSQL_PASSWORD'],
         ];
         self::$entityManager = EntityManager::create($connectionOptions, $config);
       } catch (ORMException $e) {
