@@ -47,8 +47,6 @@ class RouterHelper {
 			if ($route->checkIfMatch($requestUri))
 			{
 				$response = $route->execute();
-				// break para no seguir dando vueltas
-				// Ya se encontró la ruta correspondiente
 				break;
 			}
 		}

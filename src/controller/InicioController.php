@@ -6,8 +6,8 @@ use zinobe\helper\twig\TwigHelper;
 
 class InicioController {
 
-	public function index() {  
-		return TwigHelper::renderTemplate('index.html');
+	public function index() {
+		return TwigHelper::renderTemplate('index.html',["algo"=>"esto"]);
 	}
 
 }
