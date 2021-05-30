@@ -1,6 +1,6 @@
 <?php
 
-namespace customFramework\model;
+namespace zinobe\model;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -29,8 +29,8 @@ class Usuario {
   protected $nombre;
 
   /**
-   * @Column(type="integer")
-   * @var int
+   * @Column(type="string")
+   * @var string
    */
   protected $documento;
 
@@ -81,16 +81,16 @@ class Usuario {
   }
 
   /**
-   * @return int
+   * @return string
    */
-  public function getDocumento(): int {
+  public function getDocumento(): string {
     return $this->documento;
   }
 
   /**
-   * @param int $documento
+   * @param string $documento
    */
-  public function setDocumento(int $documento): void {
+  public function setDocumento(string $documento): void {
     $this->documento = $documento;
   }
 

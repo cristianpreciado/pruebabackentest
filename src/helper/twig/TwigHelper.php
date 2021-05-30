@@ -21,9 +21,9 @@ class TwigHelper {
     // Check if render exists.
     if (empty(self::$twigRender)) {
       // Load directory of templates.
-      $loader = new \Twig_Loader_Filesystem(getcwd() . '/src/templates');
+      $loader = new \Twig\Loader\FilesystemLoader(getcwd() . '/src/templates');
       // Initialize environment with custom configurations.
-      self::$twigRender = new \Twig_Environment($loader, array(
+      self::$twigRender = new \Twig\Environment($loader, array(
         'cache' =>  getcwd() . '/src/cache',
         'autoescape' => TRUE,
       ));
