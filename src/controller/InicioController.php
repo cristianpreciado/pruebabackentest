@@ -7,7 +7,17 @@ use zinobe\helper\twig\TwigHelper;
 class InicioController {
 
 	public function index() {
-		return TwigHelper::renderTemplate('index.html',["algo"=>"esto"]);
+		session_start();
+		if ($_SESSION["usuario"]) {
+			return TwigHelper::renderTemplate('busqueda.html');
+		}
+		return TwigHelper::renderTemplate('index.html');
 	}
-
+	public function buqueda(){
+		session_start();
+		if (!$_SESSION["usuario"]) {
+			return TwigHelper::renderTemplate('index.html');
+		}
+        return TwigHelper::renderTemplate('busqueda.html');
+    }
 }

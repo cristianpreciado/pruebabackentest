@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+    <div id="mensaje" class="alert alert-primary" role="alert">
+    </div>
+    <form id="formIngresar" style="width: 100%;padding: 15px; margin: auto;">
+        <h1 class="h3 mb-3 fw-normal">Buscar usuarios</h1>
+        <div class="form-group row">
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="usuario" placeholder="nombre o correo">
+            </div>
+            <button id="FormIngreso" class="w-100 col-sm-2 btn btn-lg btn-primary" type="button">Buscar</button>
+        </div>
+    </form>
+    <script>
+        $( document ).ready(function() {
+            
+        });
+    </script>
+{% endblock %}

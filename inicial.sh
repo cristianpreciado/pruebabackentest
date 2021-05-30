@@ -1,4 +1,5 @@
 #!/bin/bash
+composer install
 touch .env
 echo 'Introduzca host de la base de datos:'
 read host
