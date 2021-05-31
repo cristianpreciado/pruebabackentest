@@ -7,8 +7,11 @@ $router = new RouterHelper($_SERVER['REQUEST_URI']);
 $router->add('/', 'zinobe\controller\InicioController::index');
 $router->add('/busquedainicio', 'zinobe\controller\InicioController::buqueda');
 
-$router->add('/validarDocumento/:documento', 'zinobe\controller\CustomerData::validarDocumento');
-$router->add('/login/:documento/:clave', 'zinobe\controller\AutenticacionController::login');
+$router->add('/validarDocumento', 'zinobe\controller\CustomerData::validarDocumento');
+$router->add('/registrarUsuario', 'zinobe\controller\CustomerData::registrarUsuario');
+$router->add('/buscar', 'zinobe\controller\CustomerData::buscarUsurarios');
+$router->add('/login', 'zinobe\controller\AutenticacionController::login');
+$router->add('/logout', 'zinobe\controller\AutenticacionController::logout');
 
 
 $router->run();

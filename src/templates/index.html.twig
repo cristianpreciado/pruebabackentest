@@ -12,13 +12,13 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="usuario">Usuario</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="usuario" placeholder="usurario">
+                <input type="text" name="usuario" class="form-control" id="usuario" placeholder="usurario">
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="claveIngreso">Clave</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="claveIngreso" placeholder="clave">
+                <input type="password" name="claveIngreso" class="form-control" id="claveIngreso" placeholder="clave">
             </div>
         </div>
         <button id="FormIngreso" class="w-100 btn btn-lg btn-primary" type="button">Ingresar</button>
@@ -30,7 +30,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="ndocumento">Documento</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="ndocumento" placeholder="documento">
+                    <input type="text" name="ndocumento" class="form-control" id="ndocumento" placeholder="documento">
                 </div>
             </div>
             <button id="FormValidar" class="w-100 btn btn-lg btn-primary" type="button">Registrarse</button>
@@ -39,31 +39,31 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="nombre">Nombre</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="nombre" placeholder="nombre">
+                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="nombre">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="documento">Documento</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="documento" placeholder="documento">
+                    <input type="text" name="documento" class="form-control" id="documento" placeholder="documento">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="correo">Correo</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="correo" placeholder="correo">
+                    <input type="text" name="correo" class="form-control" id="correo" placeholder="correo">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="pais">País</label>
                 <div class="col-sm-10">
-                    <select class="form-control" id="pais"></select>
+                    <select class="form-control" name="pais" id="pais"></select>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="clave">Clave</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="clave" placeholder="clave">
+                    <input type="password" name="clave" class="form-control" id="clave" placeholder="clave">
                 </div>
             </div>
             <button id="FormRegitro" class="w-100 btn btn-lg btn-primary" type="button">Registrarse</button>
@@ -75,9 +75,28 @@
             $("#formRegistro").hide();
             $("#formularioCompleto").hide();
             $("#mensaje").hide();
+            $("#FormRegitro").click(function(){
+                $("#mensaje").hide();
+                let formulario = new FormData(document.getElementById("formRegistro"))
+                fetch('/registrarUsuario', {
+                    method: 'POST',
+                    body: formulario,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.mensaje){
+                        $("#mensaje").show();
+                        $("#mensaje").html("<ul>"+data.mensaje+"</ul>");
+                    }
+                });
+            });
             $("#FormValidar").click(function(){
                 $("#mensaje").hide();
-                fetch('/validarDocumento/'+$("#ndocumento").val())
+                let formulario = new FormData(document.getElementById("formRegistro"))
+                fetch('/validarDocumento', {
+                    method: 'POST',
+                    body: formulario,
+                })
                 .then(response => response.json())
                 .then(data => {
                     if(!data.validacion){
@@ -92,10 +111,13 @@
             });
             $("#FormIngreso").click(function(){
                 $("#mensaje").hide();
-                fetch('/login/'+$("#usuario").val()+'/'+$("#claveIngreso").val())
+                let formulario = new FormData(document.getElementById("formIngresar"))
+                fetch('/login', {
+                    method: 'POST',
+                    body: formulario,
+                })
                 .then(response => response.json())
                 .then(data => {
-                    console.log("esta: ",data);
                     if(data.mensaje){
                         $("#mensaje").show();
                         $("#mensaje").text(data.mensaje);

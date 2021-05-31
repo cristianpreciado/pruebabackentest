@@ -6,7 +6,8 @@
         "php": ">=7.1",
         "doctrine/orm": "^2.9",
         "twig/twig": "^3.3",
-        "vlucas/phpdotenv": "^5.3"
+        "vlucas/phpdotenv": "^5.3",
+        "symfony/http-foundation": "^5.2"
     },
     "autoload": {
         "psr-4": {

@@ -1,0 +1,28 @@
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Documento</th>
+        <th scope="col">Correo</th>
+        <th scope="col">País</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% if resultadoUsuario is defined %}
+        {% for usuario in resultadoUsuario %}
+            <tr>
+                <th scope="row">{{usuario.id}}</th>
+                <td>{{usuario.nombre}}</td>
+                <td>{{usuario.documento}}</td>
+                <td>{{usuario.correo}}</td>
+                <td>{{usuario.pais}}</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <th colspan="5">{{usuario.id}}</th>
+            </tr>
+        {% else %}
+    {% endif %}
+    </tbody>
+</table>

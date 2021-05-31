@@ -7,7 +7,9 @@ use zinobe\model\Usuario;
 
 class AutenticacionController {
 
-	public function login($documento,$clave) {
+	public function login() {
+        $documento=$_POST["usuario"];
+        $clave=$_POST["claveIngreso"];
         $usuario = DoctrineHelper::getRepository(Usuario::class)->findOneBy(array('documento' => $documento));
         if (!empty($usuario)) {
             if ($clave == $usuario->getClave()) {

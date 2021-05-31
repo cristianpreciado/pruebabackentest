@@ -1,24 +1,35 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Login
+    Busqueda de usuarios
 {% endblock %}
 
 {% block body %}
-    <div id="mensaje" class="alert alert-primary" role="alert">
-    </div>
-    <form id="formIngresar" style="width: 100%;padding: 15px; margin: auto;">
+    <a class="btn btn-danger" href="/logout" role="button">Cerrar</a>
+    <form id="formBusqueda" action="/buscarusurarios" style="width: 100%;padding: 15px; margin: auto;">
         <h1 class="h3 mb-3 fw-normal">Buscar usuarios</h1>
         <div class="form-group row">
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="usuario" placeholder="nombre o correo">
+                <input type="text" name="busqueda" class="form-control" id="busqueda" placeholder="nombre o correo">
             </div>
-            <button id="FormIngreso" class="w-100 col-sm-2 btn btn-lg btn-primary" type="button">Buscar</button>
+            <button id="FormBuscar" class="w-100 col-sm-2 btn btn-lg btn-primary" type="button">Buscar</button>
         </div>
     </form>
+    <div id="contenedorResultados"></div>
     <script>
         $( document ).ready(function() {
-            
+            $("#FormBuscar").click(function(){
+                let formulario = new FormData(document.getElementById("formBusqueda"))
+                fetch('/buscar', {
+                    method: 'POST',
+                    body: formulario,
+                })
+                .then(function (response) {
+                    return response.text();
+                }).then(function (html) {
+                    $("#contenedorResultados").html(html);
+                })
+            });
         });
     </script>
 {% endblock %}
